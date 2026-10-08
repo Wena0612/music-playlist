@@ -1,75 +1,124 @@
-import React from 'react'
+import React, { useState } from "react";
+import "./style.css";
 
-import myPhoto from './assets/kill bill.jpg'
+import arianaImg from "./assets/ariana.jpg";
+import weCantBeFriends from "./assets/we-cant-be-friends.jpg";
+import intoYou from "./assets/into-you.jpg";
+import hateThatIMadeYouLoveMe from "./assets/hate-that-i-made-you-love-me.jpg";
+import sevenRings from "./assets/7-rings.jpg";
+
+const songs = [
+  {
+    id: 1,
+    title: "we can't be friends",
+    artist: "ARIANA GRANDE",
+    cover: weCantBeFriends,
+    quote: '"I\'ll wait for your love, my love, as a matter of time"',
+  },
+  {
+    id: 2,
+    title: "Into You",
+    artist: "ARIANA GRANDE",
+    cover: intoYou,
+    quote: '"A little less conversation and a little more touch my body"',
+  },
+  {
+    id: 3,
+    title: "hate that i made you love me",
+    artist: "ARIANA GRANDE",
+    cover: hateThatIMadeYouLoveMe,
+    quote: '"I hate that I made you love me, \'cause now I have to leave"',
+  },
+  {
+    id: 4,
+    title: "7 rings",
+    artist: "ARIANA GRANDE",
+    cover: sevenRings,
+    quote: '"I see it, I like it, I want it, I got it"',
+  },
+];
 
 export default function App() {
-  
-  const vinylCenterImage = "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png"
-  const profileAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const playlistSongs = [
-    { title: "KILL BILL BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "SNOOZE BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "SHIRT BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "BLIND BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "I HATE U BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "NOBODY GETS ME BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "SPECIAL BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-    { title: "SEEK & DESTROY BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
-  ]
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   return (
-    <div className="pink-container">
-    
-      <header className="top-nav">
-        <nav className="nav-links">
-          <a href="#home">HOME</a>
-          <a href="#library">LIBRARY</a>
-          <a href="#favorites">FAVORITES</a>
-          <a href="#playlist" className="active">PLAYLIST</a>
-        </nav>
-        <div className="profile-circle">
-          <img src={profileAvatar} alt="Profile" />
+    <div className="app-container">
+      <header className="navbar">
+        <div className="nav-links">
+          <span>HOME</span>
+          <span>DISCOGRAPHY</span>
+          <span>ALBUMS</span>
+          <span className="active">PLAYLIST</span>
+        </div>
+        <div className="profile-section">
+          <div className="profile-text">
+            <strong>ARIANA GRANDE</strong>
+            <small>JUNE 26, 1993</small>
+          </div>
+          <img src={arianaImg} alt="Ariana Profile" className="profile-avatar" />
         </div>
       </header>
 
-      
-      <main className="content-grid">
-        
-       
-        <div className="vinyl-section">
-          <div className="vinyl-disc">
-            <div className="vinyl-groove g1"></div>
-            <div className="vinyl-groove g2"></div>
-            <div className="vinyl-center">
-              <img src={vinylCenterImage} alt="Vinyl Center Art" />
+      <main className="content">
+        <section className="vinyl-section">
+          <div className="record-container">
+            <div className={`vinyl-record ${isPlaying ? "spinning" : ""}`}>
+              <div className="vinyl-grooves"></div>
+              <div className="vinyl-center">
+                <img src={arianaImg} alt="Vinyl Center Ariana" />
+              </div>
+            </div>
+            
+            <div className="player-controls">
+              <button className="control-btn" onClick={togglePlay}>
+                {isPlaying ? "❚❚" : "▶"}
+              </button>
             </div>
           </div>
-        </div>
+        </section>
 
-        
-        <div className="playlist-section">
-          <h1 className="playlist-title">PLAYLIST!</h1>
+        <section className="playlist-section">
+          <h1 className="title">PLAYLIST!</h1>
 
           <div className="song-list">
-            {playlistSongs.map((song, index) => (
-              <div key={index} className="song-bar">
-                <img src={song.img} alt={song.title} className="song-thumb" />
-                <span className="song-name">{song.title}</span>
-              </div>
-            ))}
+            {songs.map((song, index) => {
+              const isSelected = index === currentSongIndex;
+              return (
+                <div
+                  key={song.id}
+                  className={`song-row ${isSelected ? "selected" : ""}`}
+                  onClick={() => {
+                    setCurrentSongIndex(index);
+                    setIsPlaying(true);
+                  }}
+                >
+                  <div className="song-card">
+                    <img src={song.cover} alt={song.title} className="song-cover" />
+                    <div className="song-info">
+                      <h3>{song.title}</h3>
+                      <p>{song.artist}</p>
+                    </div>
+                  </div>
+                  <div className="song-quote">
+                    <p>{song.quote}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
 
+          <div className="search-bar">
+            <span className="search-icon">🔍</span>
+            <input type="text" value="ARIANA'S LOVE IN MELODIES FOR YOU!" readOnly />
+            <button className="close-btn">X</button>
+          </div>
+        </section>
       </main>
-
-      
-      <div className="bottom-pill-wrapper">
-        <div className="pink-pill-btn">
-          <img src={profileAvatar} alt="Avatar" className="pill-avatar" />
-          <span>BAKA SAKALI PLAYLIST</span>
-        </div>
-      </div>
     </div>
-  )
+  );
 }
