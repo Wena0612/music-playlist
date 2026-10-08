@@ -1,122 +1,75 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+import myPhoto from './assets/kill bill.jpg'
+
+export default function App() {
+  
+  const vinylCenterImage = "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png"
+  const profileAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+
+  const playlistSongs = [
+    { title: "KILL BILL BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "SNOOZE BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "SHIRT BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "BLIND BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "I HATE U BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "NOBODY GETS ME BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "SPECIAL BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+    { title: "SEEK & DESTROY BY SZA", img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_SOS.png" },
+  ]
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="pink-container">
+    
+      <header className="top-nav">
+        <nav className="nav-links">
+          <a href="#home">HOME</a>
+          <a href="#library">LIBRARY</a>
+          <a href="#favorites">FAVORITES</a>
+          <a href="#playlist" className="active">PLAYLIST</a>
+        </nav>
+        <div className="profile-circle">
+          <img src={profileAvatar} alt="Profile" />
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      
+      <main className="content-grid">
+        
+       
+        <div className="vinyl-section">
+          <div className="vinyl-disc">
+            <div className="vinyl-groove g1"></div>
+            <div className="vinyl-groove g2"></div>
+            <div className="vinyl-center">
+              <img src={vinylCenterImage} alt="Vinyl Center Art" />
+            </div>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        
+        <div className="playlist-section">
+          <h1 className="playlist-title">PLAYLIST!</h1>
+
+          <div className="song-list">
+            {playlistSongs.map((song, index) => (
+              <div key={index} className="song-bar">
+                <img src={song.img} alt={song.title} className="song-thumb" />
+                <span className="song-name">{song.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </main>
+
+      
+      <div className="bottom-pill-wrapper">
+        <div className="pink-pill-btn">
+          <img src={profileAvatar} alt="Avatar" className="pill-avatar" />
+          <span>BAKA SAKALI PLAYLIST</span>
+        </div>
+      </div>
+    </div>
   )
 }
-
-export default App

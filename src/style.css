@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.pink-container {
+  min-height: 100vh;
+  padding: 24px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #222222;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.nav-links a.active {
+  border-bottom: 3px solid #e75480;
+  padding-bottom: 4px;
+}
+
+.profile-circle {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #e75480;
+  box-shadow: 0 4px 10px rgba(231, 84, 128, 0.3);
+}
+
+.profile-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+}
+
+
+.vinyl-section {
+  position: relative;
+  left: -140px;
+}
+
+.vinyl-disc {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #201a1c 0%, #110d0e 70%);
+  border-radius: 50%;
+  box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vinyl-groove {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.g1 { width: 400px; height: 400px; }
+.g2 { width: 320px; height: 320px; }
+
+.vinyl-center {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #110d0e;
+}
+
+.vinyl-center img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.playlist-section {
+  max-width: 520px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.playlist-title {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #222222;
+  margin-bottom: 16px;
+  border-bottom: 4px solid #e75480;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.song-bar {
+  background: linear-gradient(180deg, #f8a5c2 0%, #e77398 100%);
+  padding: 6px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 8px rgba(231, 115, 152, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.song-bar:hover {
+  transform: scale(1.02);
+}
+
+.song-thumb {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.song-name {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+
+.bottom-pill-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pink-pill-btn {
+  background: linear-gradient(180deg, #f8a5c2 0%, #e77398 100%);
+  padding: 8px 30px 8px 10px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 6px 15px rgba(231, 115, 152, 0.35);
+  cursor: pointer;
+}
+
+.pill-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+}
+
+.pink-pill-btn span {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
