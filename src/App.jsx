@@ -41,10 +41,19 @@ const songs = [
 export default function App() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
   };
+
+  const filteredSongs = songs.filter((song) => {
+    const search = searchTerm.toLowerCase();
+    return (
+      song.title.toLowerCase().includes(search) ||
+      song.artist.toLowerCase().includes(search)
+    );
+  });
 
   return (
     <div className="app-container">
@@ -55,6 +64,20 @@ export default function App() {
           <span>ALBUMS</span>
           <span className="active">PLAYLIST</span>
         </div>
+
+        <div className="nav-search-container">
+          <svg className="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search for songs, lyrics..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
         <div className="profile-section">
           <div className="profile-text">
             <strong>ARIANA GRANDE</strong>
@@ -73,7 +96,7 @@ export default function App() {
                 <img src={arianaImg} alt="Vinyl Center Ariana" />
               </div>
             </div>
-            
+
             <div className="player-controls">
               <button className="control-btn" onClick={togglePlay}>
                 {isPlaying ? "❚❚" : "▶"}
@@ -86,36 +109,39 @@ export default function App() {
           <h1 className="title">PLAYLIST!</h1>
 
           <div className="song-list">
-            {songs.map((song, index) => {
-              const isSelected = index === currentSongIndex;
-              return (
-                <div
-                  key={song.id}
-                  className={`song-row ${isSelected ? "selected" : ""}`}
-                  onClick={() => {
-                    setCurrentSongIndex(index);
-                    setIsPlaying(true);
-                  }}
-                >
-                  <div className="song-card">
-                    <img src={song.cover} alt={song.title} className="song-cover" />
-                    <div className="song-info">
-                      <h3>{song.title}</h3>
-                      <p>{song.artist}</p>
+            {filteredSongs.length > 0 ? (
+              filteredSongs.map((song) => {
+                const isSelected = song.id === songs[currentSongIndex].id;
+                return (
+                  <div
+                    key={song.id}
+                    className={`song-row ${isSelected ? "selected" : ""}`}
+                    onClick={() => {
+                      const realIndex = songs.findIndex((s) => s.id === song.id);
+                      setCurrentSongIndex(realIndex);
+                      setIsPlaying(true);
+                    }}
+                  >
+                    <div className="song-card">
+                      <img
+                        src={song.cover}
+                        alt={song.title}
+                        className="song-cover"
+                      />
+                      <div className="song-info">
+                        <h3>{song.title}</h3>
+                        <p>{song.artist}</p>
+                      </div>
+                    </div>
+                    <div className="song-quote">
+                      <p>{song.quote}</p>
                     </div>
                   </div>
-                  <div className="song-quote">
-                    <p>{song.quote}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="search-bar">
-            <span className="search-icon">🔍</span>
-            <input type="text" value="ARIANA'S LOVE IN MELODIES FOR YOU!" readOnly />
-            <button className="close-btn">X</button>
+                );
+              })
+            ) : (
+              <p className="no-results">No songs found</p>
+            )}
           </div>
         </section>
       </main>
